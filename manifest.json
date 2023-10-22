@@ -1,0 +1,10 @@
+{
+  "name": "App Adopta a tu compa",
+  "short_name": "adopta",
+  "theme_color": "#04544a",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": ".",
+  "description": "App versión 1.0.0 de adopción de mascotas"
+}

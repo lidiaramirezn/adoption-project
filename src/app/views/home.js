@@ -5,6 +5,12 @@ import resetCSS  from './../shared/reset-css.js';
 import commonCSS  from './../shared/commons-css';
 
 export class Home extends LitElement {
+  static get properties(){
+    return {
+      pets: { type: Array }
+    }
+  }
+
   static styles = [
     resetCSS,
     commonCSS,
@@ -36,6 +42,16 @@ export class Home extends LitElement {
 
     `
   ];
+
+  constructor() {
+    super();
+
+    import('./../firebase/pet.js').then(({ getPetInformation })=>{
+      getPetInformation().then(pets => {
+        console.log('***pets', pets);
+      });
+    });
+  }
 
   data = data;  
 
