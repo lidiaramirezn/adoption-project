@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { data } from '../data';
-import '../components/card-home';
+import './../components/index';
 import resetCSS  from './../shared/reset-css.js';
 import commonCSS  from './../shared/commons-css';
 

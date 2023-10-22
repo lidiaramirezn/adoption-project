@@ -70,14 +70,5 @@ export const data = [
 		"district": "26 de Octubre",
 		"sterilized": false,
 		"image": "https://img.miwuki.com/GC6rt5v9/500"
-	},
-	{
-		"id": "e2309043-037e-4397-919d-12ebccc5d5b9",
-		"name": "Loki",
-		"age": 4,
-		"gender": "M",
-		"district": "Piura",
-		"sterilized": false,
-		"image": "https://lanoticia.com/wp-content/uploads/2022/03/quieres-adoptar-gato-como.jpg"
 	}
 ]

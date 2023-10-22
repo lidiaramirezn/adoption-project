@@ -1,10 +1,9 @@
-import { LitElement, html, css } from 'lit';
-import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup  } from "firebase/auth";
+import { LitElement, html, css, nothing } from 'lit';
 import resetCSS  from './../shared/reset-css.js';
 import { navigator } from "lit-element-router";
 import commonCSS  from './../shared/commons-css';
-
+import logo  from './../../assets/logo.svg';
+import tree from './../state.js';
 export class Header extends navigator(LitElement) {
   static styles = [
     resetCSS,
@@ -18,16 +17,37 @@ export class Header extends navigator(LitElement) {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 10px 20px;
+        padding: 10px 30px;
         background-color: var(--header);
       }
 
-      .header-options {
+      .header__logo {
+        height: 80px;
+      }
+
+      .header__options {
         display: flex;
       }
 
-      .header-option:first-child {
+      .header__option:first-child {
         padding-right: 10px;
+      }
+
+      .header__button {
+        margin-top: 5px;
+        border: 1px solid var(--color-secondary);
+        color: var(--color-secondary);        
+      }
+
+      .header__right {
+        display: flex;
+        align-items: center;
+        color: var(--color-secondary);
+      }
+
+      .header__username {
+        margin-right: 10px;
+        margin-left: 10px;
       }
     `
   ];
@@ -38,49 +58,67 @@ export class Header extends navigator(LitElement) {
       hrefLogin: { type: String },
       hrefRegister: { type: String },
       hrefAddAdoption: { type: String },
-      isAuthenticated: { type: Boolean }
+      isAuthenticated: { type: Boolean },
+      user: { type: Object }
     };
   }
   
 
   constructor() {
     super();
-    this.isAuthenticated = false;
+    import('../firebase/auth.js').then(({ login, logout }) => {        
+      this.login = function(){
+        login().then(()=>{}).catch(err =>{
+          tree.select('error').set( err );
+        })
+      }
+
+      this.logout = logout;
+    });
   }
   
-  firebaseConfig = {
-  };
-  variable = 'lid';
-  app = initializeApp(this.firebaseConfig);
-  auth = getAuth(this.app);
-  provider = new GoogleAuthProvider();
-  
-  render() {    
-
-    this.auth.onAuthStateChanged( (user) => {
-      this.isAuthenticated = !!user;
-    })
-
+  render() {
     return html`
       <header>
         <div>
         <a href="${this.hrefHome}" @click="${e => this.linkClick(e, this.hrefHome)}">
-          logo              
+          <img class="header__logo" src=${logo}/>              
         </a>
         </div>
         <section class="header-right">
-          <strong class="paragraph">Da en adopción</strong>
-          <div class="header-options">          
-            <div class="header-option">
-              ${!this.isAuthenticated ?  
+          ${!this.user ?  
+            html`
+              <strong class="paragraph">Da en adopción</strong>` : nothing                
+            }
+
+          <div class="header__options">          
+            <div class="header__option">
+              ${!this.user ?  
                 html`
-                <a class="link" @click="${this.login}">
+                <button class="header__button" 
+                  @click=${ function(){ this.login() }}>
                   Iniciar sesión
-                </a>` : 
+                </button>` : 
                 html`
-                <a class="link" @click="${this.logout}">
-                  Cerrar sesión
-                </a>`
+                <div class="header__right">
+
+                  <button class="header__button" 
+                    @click="${e => this.linkClick(e, this.hrefAddAdoption)}">
+                    Da en adopción 
+                  </button>
+                  
+                  <label class="header__username">${this.user.displayName}</label>                  
+                  <button class="link"
+                    @click=${ function(){ this.logout() } }>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout" width="32"  height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                      <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                      <path d="M9 12h12l-3 -3" />
+                      <path d="M18 15l3 -3" />
+                    </svg>
+                  </button>                
+                </div>
+                `
               } 
             </div>
             <!-- <div class="header-option">
@@ -98,31 +136,6 @@ export class Header extends navigator(LitElement) {
   linkClick(e, value) {
     e.preventDefault();
     this.navigate(value);  
-  }
-
-  logout() {
-    this.auth.signOut()
-    .then(() => {
-      this.isAuthenticated = false;
-      this.navigate('/');
-    })
-    .catch( error => console.log(error));
-  }
-
-  login() {
-    signInWithPopup(this.auth, this.provider)
-    .then((result) => { 
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;    
-      const user = result.user;
-      this.navigate(this.hrefAddAdoption);
-    }).catch((error) => {
-      console.error('signInWithPopup.error', error);
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      const email = error.customData.email;
-      const credential = GoogleAuthProvider.credentialFromError(error);
-    });
   }
 
 }

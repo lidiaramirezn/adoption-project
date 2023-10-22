@@ -18,10 +18,17 @@ export class CardHome extends LitElement {
         margin: 10px;
         border-radius: var(--radius);
         box-shadow: var(--box-shadow);
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+        cursor: pointer;
+      }
+
+      .card:hover{
+        box-shadow: var(--box-shadow-hover);
       }
 
       .card__image {
-        object-fit: contain;
+        border-top-right-radius: var(--radius);
+        border-top-left-radius: var(--radius);
       }
 
       .card__content {
@@ -60,7 +67,6 @@ export class CardHome extends LitElement {
   
 
   render() {
-    // console.log('ajaaa', this.data)
     return html`
       <article class="card">
         <picture>

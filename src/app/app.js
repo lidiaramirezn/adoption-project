@@ -1,15 +1,10 @@
 import { LitElement, html, css } from 'lit';
-import { router } from "lit-element-router";
-import './components/header';
-import './components/footer'; 
-import './components/main'; 
-import './views/home'; 
-import './views/login';
-import './views/register';
-import './views/addAdoption';
+import { router } from 'lit-element-router';
+import './components/index'
+import './views/index';
 import resetCSS  from './shared/reset-css.js';
 import commonCSS  from './shared/commons-css';
-
+import tree from './state';
 export class App extends router(LitElement) {
   static styles = [
     resetCSS,
@@ -43,14 +38,6 @@ export class App extends router(LitElement) {
     ]
   }
 
-  constructor() {
-    super();
-    this.route = "";
-    this.params = {};
-    this.query = {};
-    this.data = {};
-  }
-
   router(route, params, query, data) {
     this.route = route;
     this.params = params;
@@ -58,13 +45,32 @@ export class App extends router(LitElement) {
     this.data = data;
   }
 
+  static get properties() {
+    return {
+      user: { type: Object }
+    };
+  }
+
+  constructor() {
+    super();
+    this.route = "";
+    this.params = {};
+    this.query = {};
+    this.data = {};
+
+    tree.select('user').on('update',(e) => {
+      this.user = e.data.currentData;
+    });
+  }
+  
   render() {
     return html`
       <app-header         
         hrefHome="/" 
         hrefLogin="/login" 
         hrefRegister="/register"
-        hrefAddAdoption="/dar-en-adopcion">
+        hrefAddAdoption="/dar-en-adopcion" 
+        .user="${this.user}">
       </app-header>
       <app-main active-route=${this.route}>
         <div route="home">
@@ -77,7 +83,7 @@ export class App extends router(LitElement) {
           <app-register></app-register>
         </div>
         <div route="addAdoption">
-          <app-add-adoption></app-add-adoption>
+          <app-add-adoption .user="${this.user}"></app-add-adoption>
         </div>
       </app-main>        
       <app-footer></app-footer>
