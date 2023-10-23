@@ -5,6 +5,7 @@ set -e
 
 # build
 npm run build
+cp ./sw.js ./dist
 
 # navigate into the build output directory
 cd dist

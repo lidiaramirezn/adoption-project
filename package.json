@@ -21,7 +21,7 @@
     "vite": "^4.4.5"
   },
   "files": [
-    "./sw.js"
+    "/sw.js"
   ],
   "directories": { "assets": "./src/assets"}
 }

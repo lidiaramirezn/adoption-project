@@ -92,4 +92,4 @@ export class App extends router(LitElement) {
 }
 customElements.define('main-app', App);
 
-/* navigator.serviceWorker.register('/sw.js'); */
+navigator.serviceWorker.register('/sw.js');
