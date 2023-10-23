@@ -85,9 +85,9 @@ export class Header extends navigator(LitElement) {
     return html`
       <header>
         <div>
-        <a href="${this.hrefHome}" @click="${e => this.linkClick(e, this.hrefHome)}">
+        <button @click="${e => this.linkClick(e, this.hrefHome)}">
           <img class="header__logo" src=${logo}/>              
-        </a>
+        </button>
         </div>
         <section class="header-right">
           ${!this.user ?  

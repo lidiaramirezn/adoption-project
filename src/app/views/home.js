@@ -4,7 +4,12 @@ import './../components/index';
 import resetCSS  from './../shared/reset-css.js';
 import commonCSS  from './../shared/commons-css';
 import { register } from 'swiper/element/bundle';
-
+import slider1Desktop from './../../assets/slider1_desktop.png';
+import slider1Tablet from './../../assets/slider1_tablet.png';
+import slider1Mobile from './../../assets/slider1_mobile.png';
+import slider2Desktop from './../../assets/slider2_desktop.png';
+import slider2Tablet from './../../assets/slider2_tablet.png';
+import slider2Mobile from './../../assets/slider2_mobile.png';
 export class Home extends LitElement {
   static get properties(){
     return {
@@ -100,16 +105,16 @@ export class Home extends LitElement {
         css-mode="true">
         <swiper-slide>
           <picture>
-            <source media="(max-width: 768px)" srcset="src/assets/slider1_mobile.png"/>
-            <source media="(max-width: 950px)" srcset="src/assets/slider1_tablet.png"/>
-            <img src="src/assets/slider1_desktop.png" alt="" />
+            <source media="(max-width: 768px)" srcset=${slider1Mobile}/>
+            <source media="(max-width: 950px)" srcset=${slider1Tablet}/>
+            <img src=${slider1Desktop} alt="" />
           </picture>
         </swiper-slide>
         <swiper-slide>
           <picture>
-          <source media="(max-width: 768px)" srcset="src/assets/slider2_mobile.png"/>
-            <source media="(max-width: 950px)" srcset="src/assets/slider2_tablet.png"/>
-            <img src="src/assets/slider2_desktop.png" alt="" />
+          <source media="(max-width: 768px)" srcset=${slider2Mobile}/>
+            <source media="(max-width: 950px)" srcset=${slider2Tablet}/>
+            <img src=${slider2Desktop} alt="" />
           </picture>
         </swiper-slide>
       </swiper-container>

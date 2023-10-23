@@ -38,7 +38,7 @@ offlineFallback();
 staticResourceCache();
 
 precacheAndRoute([
-  { url: '/index.html', revision: true }
+  { url: '/adoption-project/index.html', revision: true }
 ]);
 
 imageCache();

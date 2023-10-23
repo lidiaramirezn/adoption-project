@@ -4,9 +4,9 @@ import { defineConfig } from 'vite'
 // https://vitejs.dev/config/
 export default defineConfig({
   define: {
-    global: {},
+    global: {}
   },
-  base: '/adoption-project/',
+  base: '/adoption-project',
   resolve: {
     alias: {
     }
