@@ -69,7 +69,7 @@ export class AddADoption extends LitElement {
             <div class="col-4">
               <div>
                 <label for="name">Nombre</label>
-                <input type="text" id="name" minlength="3" maxlength="30" 
+                <input type="text" id="name" minlength="3" maxlength="30" required
                   placeholder='Ingrese nombre de mascota' 
                   .value=${live(this.pet.name)}
                   @input=${ (e) => { this.pet.name = e.target.value } } />
@@ -82,7 +82,7 @@ export class AddADoption extends LitElement {
               </div>
               <div>
                 <label for="gender">Sexo</label>            
-                <select id="gender" 
+                <select id="gender" required
                   .value=${live(this.pet.gender)}
                   @change=${ (e) => { this.pet.gender = e.target.value } }>
                   <option value="H">Hembra</option>
@@ -92,7 +92,7 @@ export class AddADoption extends LitElement {
               </div>
               <div>
                 <label for="district">Distrito</label>            
-                <select id="district" 
+                <select id="district" required
                   .value=${live(this.pet.district)}
                   @change=${ (e) => { this.pet.district = e.target.value } } >
                   <option value="PIURA">Piura</option>
@@ -164,7 +164,7 @@ export class AddADoption extends LitElement {
           <div class="add-adoption__wrapper-button">
             <button class="button__primary" type="submit">Agregar</button>
           </div>
-        </form>
+        </form>        
       </div>
     `;
   }
@@ -187,16 +187,14 @@ export class AddADoption extends LitElement {
   }
 
   add(e) {
-    console.log('Se agrego', this.pet);
-    // todo: Agregar modal creación exitosa
     e.preventDefault();
     this.create(this.pet);
+    alert('Se agregó exitosamente')
     this.clean();
   }
 
   clean() {
     this.pet = this.newPet();
-    console.log('Limpiar', this.pet);
   }
 }
 customElements.define('app-add-adoption', AddADoption);

@@ -23,8 +23,8 @@ export default css `
   }
 
   .button__secondary {
-    background-color: var(--button-secondary);
     color: var(--button-secondary-text);
+    border: 1px solid var(--button-secondary-border);
   }
 
   .paragraph {

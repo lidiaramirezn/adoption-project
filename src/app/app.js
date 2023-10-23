@@ -87,13 +87,9 @@ export class App extends router(LitElement) {
         </div>
       </app-main>        
       <app-footer></app-footer>
-      <!-- 
-        <p>
-        Si quieres adoptarlo, escríbenos un email a adopta@elrefugio.org  adjuntando un teléfono 
-      </p>
-      -->
     `;
   }
 }
 customElements.define('main-app', App);
-navigator.serviceWorker.register('/sw.js')
+
+navigator.serviceWorker.register('/sw.js');

@@ -1,7 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import resetCSS  from './../shared/reset-css.js';
 import commonCSS  from './../shared/commons-css';
-import litLogo from './../../assets/lit2.svg'
 
 export class Footer extends LitElement {
   static styles = [
@@ -19,7 +18,7 @@ export class Footer extends LitElement {
         align-items: center;
         flex-direction: column;
         padding: 15px 30px;
-        background-color: var(--header);
+        background-color: var(--footer);
         color: var(--color-secondary);
         font-weight: 500;
         font-size: 1.1em;

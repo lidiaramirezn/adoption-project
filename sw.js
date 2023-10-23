@@ -38,9 +38,7 @@ offlineFallback();
 staticResourceCache();
 
 precacheAndRoute([
-  { url: '/index.html', revision: true },
-  { url: '/src/assets/logo.svg', revision: true },
-  { url: '/src/assets/gato.jpg', revision: true }
+  { url: '/index.html', revision: true }
 ]);
 
 imageCache();

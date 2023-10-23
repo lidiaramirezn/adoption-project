@@ -4,32 +4,30 @@
   line-height: 1.5;
   font-weight: 400;
 
-  --color-primary: rgb(13, 106, 112); /* header, botones primarios, resaltados (hover), */
-  --color-secondary: rgb(255, 255, 255); /* constraste del color primario (parrafos, textos de boton, links)*/
-  --color-tertiary: rgb(201, 247, 237); /* */
+  --color-primary: #fbb847; /* header, botones primarios, resaltados (hover), */
+  --color-secondary: #ffffff; /* constraste del color primario (parrafos, textos de boton, links)*/
+  --color-tertiary: #ffffff; /* */
   --color-fourth: rgb(64, 62, 62); /* textos del boton y textos del input */
-  --color-fifth: rgb(248, 252, 255); /* background */
+  --color-fifth: #f1eeee; /* background */
 
   --background-body: var(--color-fifth);
   --header: var(--color-primary);
   --footer: var(--color-primary);
 
-  --headline: #33272a;  
-  --subheadline: #33272a;
   --paragraph: var(--color-secondary);
   
   --button-primary: var(--color-primary);
   --button-primary-text: var(--color-secondary);
-  --button-primary-hover: var(--color-tertiary);
+  --button-primary-hover: var(--color-secondary);
 
-  --button-secondary: var(--color-tertiary);
-  --button-secondary-text: var(--color-fourth);
+  --button-secondary-border: var(--color-secondary);
+  --button-secondary-text: var(--color-secondary);
 
   --link-text: var(--color-secondary);
   --link-hover: var(--color-tertiary);
 
-  --card-background: #03506f;
   --card-text: var(--color-fourth);
+  --card-background: var(--color-secondary);
 
   --shadow-color: 0deg 0% 63%;
   /* --box-shadow:
@@ -37,14 +35,18 @@
       0.8px 1.6px 2px -0.8px hsl(var(--shadow-color) / 0.36),
       2.1px 4.1px 5.2px -1.7px hsl(var(--shadow-color) / 0.36),
       5px 10px 12.6px -2.5px hsl(var(--shadow-color) / 0.36); */
-  --box-shadow: 0 1px 3px rgba(80, 80, 80, 0.12), 0 1px 2px rgba(80, 80, 80, 0.24);
-  --box-shadow-hover: 0 14px 28px rgba(80,80,80,0.25), 0 10px 10px rgba(80,80,80,0.22);
-
+  --box-shadow: 0 1px 3px rgba(80, 80, 80, 0.12), 
+                0 1px 2px rgba(80, 80, 80, 0.24);
+  --box-shadow-hover: 0 14px 28px rgba(80,80,80,0.25), 
+                      0 10px 10px rgba(80,80,80,0.22);
   --radius: 8px;
+
+  --background-color-swiper-button: rgba(0, 0, 0, 0.4);
+  --background-color-swiper-bullet: rgb(250, 0, 0);
+  --swiper-navigation-size: 2px;
 }
 
 body {
   margin: 0;
   background-color: var(--background-body);
 }
-

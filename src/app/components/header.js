@@ -34,9 +34,7 @@ export class Header extends navigator(LitElement) {
       }
 
       .header__button {
-        margin-top: 5px;
-        border: 1px solid var(--color-secondary);
-        color: var(--color-secondary);        
+        margin-top: 5px;  
       }
 
       .header__right {
@@ -68,12 +66,18 @@ export class Header extends navigator(LitElement) {
     super();
     import('../firebase/auth.js').then(({ login, logout }) => {        
       this.login = function(){
-        login().then(()=>{}).catch(err =>{
+        login().then(()=>{
+          this.navigate(this.hrefAddAdoption);  
+        }).catch(err =>{
           tree.select('error').set( err );
         })
       }
 
       this.logout = logout;
+    });
+
+    tree.select('user').on('update',(e) => {
+      this.user = e.data.currentData;
     });
   }
   
@@ -95,14 +99,14 @@ export class Header extends navigator(LitElement) {
             <div class="header__option">
               ${!this.user ?  
                 html`
-                <button class="header__button" 
-                  @click=${ function(){ this.login() }}>
+                <button class="button__secondary header__button" 
+                  @click=${ function() { this.login() }}>
                   Iniciar sesión
                 </button>` : 
                 html`
                 <div class="header__right">
 
-                  <button class="header__button" 
+                  <button class="button__secondary " 
                     @click="${e => this.linkClick(e, this.hrefAddAdoption)}">
                     Da en adopción 
                   </button>
@@ -116,7 +120,7 @@ export class Header extends navigator(LitElement) {
                       <path d="M9 12h12l-3 -3" />
                       <path d="M18 15l3 -3" />
                     </svg>
-                  </button>                
+                  </button>      
                 </div>
                 `
               } 
