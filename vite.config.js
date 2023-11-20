@@ -6,7 +6,7 @@ export default defineConfig({
   define: {
     global: {}
   },
-  base: '/adoption-project',
+  base: '/',
   resolve: {
     alias: {
     }

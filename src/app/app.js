@@ -66,7 +66,7 @@ export class App extends router(LitElement) {
   render() {
     return html`
       <app-header         
-        hrefHome="" 
+        hrefHome="/" 
         hrefLogin="/login" 
         hrefRegister="/register"
         hrefAddAdoption="/dar-en-adopcion" 
@@ -92,4 +92,4 @@ export class App extends router(LitElement) {
 }
 customElements.define('main-app', App);
 
-navigator.serviceWorker.register('/adoption-project/sw.js');
+navigator.serviceWorker.register('/sw.js');

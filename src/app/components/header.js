@@ -60,23 +60,29 @@ export class Header extends navigator(LitElement) {
       user: { type: Object }
     };
   }
-  
+
 
   constructor() {
     super();
-    import('../firebase/auth.js').then(({ login, logout }) => {        
-      this.login = function(){
-        login().then(()=>{
-          this.navigate(this.hrefAddAdoption);  
-        }).catch(err =>{
-          tree.select('error').set( err );
-        })
-      }
+    import('../firebase/auth.js').then(({ login, logout }) => {
+      this.login = function () {
+        login().then(() => {
+          this.navigate(this.hrefAddAdoption);
+        }).catch(err => {
+          tree.select('error').set(err);
+        });
+      };
 
-      this.logout = logout;
+      this.logout = function () {
+        logout().then(() => {
+          this.navigate(this.hrefHome);
+        }).catch(err => {
+          tree.select('error').set(err);
+        });
+      };
     });
 
-    tree.select('user').on('update',(e) => {
+    tree.select('user').on('update', (e) => {
       this.user = e.data.currentData;
     });
   }
@@ -100,7 +106,7 @@ export class Header extends navigator(LitElement) {
               ${!this.user ?  
                 html`
                 <button class="button__secondary header__button" 
-                  @click=${ function() { this.login() }}>
+                  @click=${() => this.login()}>
                   Iniciar sesión
                 </button>` : 
                 html`
@@ -113,7 +119,7 @@ export class Header extends navigator(LitElement) {
                   
                   <label class="header__username">${this.user.displayName}</label>                  
                   <button class="link"
-                    @click=${ function(){ this.logout() } }>
+                    @click=${() => this.logout()}>
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout" width="32"  height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                       <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                       <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
