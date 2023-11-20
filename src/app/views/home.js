@@ -43,6 +43,7 @@ export class Home extends LitElement {
         margin-top: 30px;
         margin-bottom: 50px;
         min-height: 500px;
+        justify-content: center;
       }
 
       swiper-container {

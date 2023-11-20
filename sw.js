@@ -29,16 +29,17 @@ self.addEventListener('fetch', event => {
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/6.2.0/workbox-sw.js');
 
 const { NetworkOnly } = workbox.strategies;
-const { setDefaultHandler } = workbox.routing;
+const { setDefaultHandler, registerRoute } = workbox.routing;
 const  { offlineFallback, staticResourceCache, imageCache  } = workbox.recipes;
-const { precacheAndRoute } = workbox.precaching;
+const { precacheAndRoute, cleanupOutdatedCaches } = workbox.precaching;
 
 setDefaultHandler(new NetworkOnly());
 offlineFallback();
+cleanupOutdatedCaches();
 staticResourceCache();
 
 precacheAndRoute([
-  { url: '/adoption-project/index.html', revision: true }
+  { url: '/index.html', revision: '20231119'}
 ]);
 
 imageCache();
